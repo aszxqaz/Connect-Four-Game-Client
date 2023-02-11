@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { LayerBlack } from "../icons/LayerBlack";
 import { LayerWhite } from "../icons/LayerWhite";
 import { PropsWithChildren, createElement } from "react";
+import { BaseDivFC } from "../components/base";
 
 export const Board: React.FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -41,8 +42,3 @@ const Absolute = styled(_Absolute)`
   ${({ zIndex }) => (zIndex ? `z-index: ${zIndex};` : "")}
 `;
 
-function BaseDivFC<T>(
-  props: { children?: React.ReactNode; className?: string } & T
-) {
-  return <div className={props.className}>{props.children}</div>;
-}

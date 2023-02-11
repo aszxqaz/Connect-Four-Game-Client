@@ -1,6 +1,13 @@
 import { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react";
 import styled from "styled-components";
-import { basicPlateStyle, colors, fontSizes, fontWeights, hoverBoxShadow } from "./constants";
+import {
+  basicPlateStyle,
+  colors,
+  fontSizes,
+  fontWeights,
+  hoverBoxShadow,
+} from "./constants";
+import { Spinner } from "./Spinner";
 
 type Variants = "primary" | "outline" | "danger";
 
@@ -16,28 +23,25 @@ const internalColors: Record<Variants, typeof colors[keyof typeof colors]> = {
   danger: colors.pink,
 };
 
-const InternalButton: React.FC<PropsWithChildren<ButtonProps>> = ({
+const Base: React.FC<PropsWithChildren<ButtonProps>> = ({
   children,
   className,
   icon,
   align = "center",
+  ...rest
 }) => {
   return (
-    <button className={className}>
+    <button className={className} {...rest}>
+      {rest.disabled ? <Spinner /> : null}
       <span>{children}</span>
       {icon}
     </button>
   );
 };
 
-export const MainMenuButton = styled(InternalButton)`
+export const MainMenuButton = styled(styled(Base)`
   display: flex;
-  justify-content: ${(props) =>
-    props.icon
-      ? `space-between`
-      : props.align === "start"
-      ? "flex-start"
-      : "center"};
+  position: relative;
 
   align-items: center;
 
@@ -48,20 +52,37 @@ export const MainMenuButton = styled(InternalButton)`
   padding: 21px 20px 20px 20px;
 
   text-transform: uppercase;
-  background-color: ${({ variant = "outline" }) => internalColors[variant]};
 
   ${basicPlateStyle}
 
   font-size: ${fontSizes.medium};
   font-weight: ${fontWeights.bold};
   font-family: inherit;
-  letter-spacing: 0.08em;
-  color: ${({ variant = "outline" }) =>
-    variant === "danger" ? colors.white : colors.black};
 
   cursor: pointer;
+  user-select: none;
 
-  &:hover {
+  transition: all 0.2s ease-in;
+
+  &:disabled {
+    box-shadow: 0px 2px 0px ${colors.black};
+    color: transparent;
+    transform: translateY(8px);
+    cursor: initial;
+  }
+`)`
+  justify-content: ${(props) =>
+    props.icon
+      ? `space-between`
+      : props.align === "start"
+      ? "flex-start"
+      : "center"};
+
+  background-color: ${({ variant = "outline" }) => internalColors[variant]};
+
+  color: ${({ variant = "outline" }) =>
+    variant === "danger" ? colors.white : colors.black};
+  &:hover:not(:disabled) {
     border-color: ${colors.darkblue};
     ${hoverBoxShadow};
   }
