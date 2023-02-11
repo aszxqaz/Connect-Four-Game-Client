@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { api } from "../api/http";
+import { AppSocket, ClientToServer, ServerToClient } from "../socketio";
 
 export const useGameplayStore = create((set) => ({
   cursor: 0,
@@ -14,12 +15,18 @@ type GlobalState = {
   username: string | null;
   me: () => Promise<void | { user: { username: string } } | { error: any }>;
   startVsCPU: () => void;
-  login:  (username: string) => Promise<void | { user: { username: string; }; } | { error: any; }>
+  startVsPlayer: (
+    socket: AppSocket,
+    callback: ServerToClient["gameCreated"]
+  ) => void;
+  login: (
+    username: string
+  ) => Promise<void | { user: { username: string } } | { error: any }>;
   wasAuth: boolean;
 };
 
 export const useGlobalStore = create<GlobalState>((set, get) => ({
-  state: "LOGIN",
+  state: "MAIN_MENU",
   wasAuth: false,
   username: null,
   me: () => {
@@ -31,11 +38,11 @@ export const useGlobalStore = create<GlobalState>((set, get) => ({
           wasAuth: true,
         });
       }
-      if("error" in data) {
+      if ("error" in data) {
         set({
-            state: "LOGIN",
-            wasAuth: true,
-          });
+          state: "LOGIN",
+          wasAuth: true,
+        });
       }
     });
   },
@@ -45,19 +52,31 @@ export const useGlobalStore = create<GlobalState>((set, get) => ({
   },
   login: async (username: string) => {
     return api.login(username).then((data) => {
-        if ("user" in data) {
-          set({
-            username: data.user.username,
-            state: "MAIN_MENU",
-            wasAuth: true,
-          });
-        }
-        if("error" in data) {
-          set({
-              state: "LOGIN",
-              wasAuth: false,
-            });
-        }
-      });
+      if ("user" in data) {
+        set({
+          username: data.user.username,
+          state: "MAIN_MENU",
+          wasAuth: true,
+        });
+      }
+      if ("error" in data) {
+        set({
+          state: "LOGIN",
+          wasAuth: false,
+        });
+      }
+    });
+  },
+  startVsPlayer: (
+    socket: AppSocket,
+    callback: ServerToClient["gameCreated"]
+  ) => {
+    socket.on("gameCreated", (result) => {
+      callback(result);
+      if (result.ok) {
+        set({ state: "PENDING" });
+      }
+    });
+    socket.emit("createGame");
   },
 }));

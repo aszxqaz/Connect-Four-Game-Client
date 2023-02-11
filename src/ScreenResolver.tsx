@@ -18,6 +18,8 @@ export const ScreenResolver = () => {
     me();
   }, [me]);
 
+//   return <Pending />
+
   if (!wasAuth) return <Spinner />;
   if (!username) return <EnterName />
 

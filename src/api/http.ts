@@ -1,8 +1,8 @@
 import Axios from "axios";
-const { PROD, VITE_API_URL_PROD, VITE_API_URL_DEV } = import.meta.env;
+import { configs } from "../config";
 
 const axios = Axios.create({
-  baseURL: PROD ? VITE_API_URL_PROD : VITE_API_URL_DEV,
+  baseURL: configs.httpBaseUrl,
   withCredentials: true,
 });
 

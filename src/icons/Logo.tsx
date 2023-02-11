@@ -11,19 +11,19 @@ export const LogoSVG = ({ className }: { className?: string }) => {
       <g id="Group 12">
         <g id="Oval Copy 11" filter="url(#filter0_d_5_2609)">
           <circle cx="13" cy="13" r="10" fill="#FD6687" />
-          <circle cx="13" cy="13" r="11.5" stroke="black" stroke-width="3" />
+          <circle cx="13" cy="13" r="11.5" stroke="black" strokeWidth="3" />
         </g>
         <g id="Oval Copy 25" filter="url(#filter1_d_5_2609)">
           <circle cx="45" cy="45" r="10" fill="#FD6687" />
-          <circle cx="45" cy="45" r="11.5" stroke="black" stroke-width="3" />
+          <circle cx="45" cy="45" r="11.5" stroke="black" strokeWidth="3" />
         </g>
         <g id="Oval Copy 23" filter="url(#filter2_d_5_2609)">
           <circle cx="45" cy="13" r="10" fill="#FFCE67" />
-          <circle cx="45" cy="13" r="11.5" stroke="black" stroke-width="3" />
+          <circle cx="45" cy="13" r="11.5" stroke="black" strokeWidth="3" />
         </g>
         <g id="Oval Copy 24" filter="url(#filter3_d_5_2609)">
           <circle cx="13" cy="45" r="10" fill="#FFCE67" />
-          <circle cx="13" cy="45" r="11.5" stroke="black" stroke-width="3" />
+          <circle cx="13" cy="45" r="11.5" stroke="black" strokeWidth="3" />
         </g>
       </g>
       <defs>
@@ -67,9 +67,9 @@ export const LogoSVG = ({ className }: { className?: string }) => {
           width="26"
           height="29"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -133,7 +133,7 @@ export const LogoSVG = ({ className }: { className?: string }) => {
           width="26"
           height="29"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix

@@ -63,6 +63,7 @@ export const MainMenuButton = styled(styled(Base)`
   user-select: none;
 
   transition: all 0.2s ease-in;
+  margin-bottom: 10px;
 
   &:disabled {
     box-shadow: 0px 2px 0px ${colors.black};
