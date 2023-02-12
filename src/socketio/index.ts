@@ -3,6 +3,7 @@ import { configs } from "../config";
 
 export interface ServerToClient {
   gameCreated: (result: { ok: boolean }) => void;
+  gameState: (gameState: { board: string[] }) => void
 }
 
 export interface ClientToServer {

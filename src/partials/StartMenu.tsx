@@ -19,9 +19,9 @@ export const StartMenu = () => {
   ]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    socket.connect();
-  }, []);
+//   useEffect(() => {
+//     socket.connect();
+//   }, []);
 
   return (
     <Dialog isCollapsedAtMobile>

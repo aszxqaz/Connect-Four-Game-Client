@@ -77,6 +77,10 @@ export const useGlobalStore = create<GlobalState>((set, get) => ({
         set({ state: "PENDING" });
       }
     });
+    socket.on("gameState", gameState => {
+        set({ state: "PLAYING" });
+    } )
+    socket.connect()
     socket.emit("createGame");
   },
 }));
