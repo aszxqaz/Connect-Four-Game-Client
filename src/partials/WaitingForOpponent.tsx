@@ -3,7 +3,7 @@ import { BaseDivFC } from "../components/base";
 import { Dialog, Heading } from "../components";
 import { Spinner } from "../components/Spinner";
 
-export const Pending = () => {
+export const WaitingForOpponent = () => {
   return (
     <Dialog>
       <Heading size="lg">Waiting for another player...</Heading>

@@ -9,9 +9,11 @@ export const GlobalStyle = createGlobalStyle`
         height: 100%;
 
         font-family: 'Space Grotesk';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: hsl(257, 100%, 64%);
+        font-size: 16px; 
+
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: hsl(257, 100%, 64%);
     }
     #root {
         height: 100%;
@@ -21,6 +23,27 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     svg {
+        /* display: block; */
+    }
+
+    ol { 
+        counter-reset: item;
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li { 
+        display: flex; 
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+
+    li:before { 
         display: block;
+        content: counter(item) "  "; 
+        counter-increment: item;
+        margin-right: 20px;
+        font-weight: 700;
     }
 `;

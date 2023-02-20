@@ -1,62 +1,73 @@
-import { HTMLAttributes, PropsWithChildren } from "react";
-import styled from "styled-components";
-import { TurnPlateSvg } from "../icons/TurnPlateSvg";
+import { HTMLAttributes, PropsWithChildren } from 'react'
+import styled from 'styled-components'
+import { TurnPlateSvg } from '../c_icons/TurnPlateSvg'
 import {
-  Color,
-  ColorScheme,
-  colorSchemes,
-  colors,
-  fontSizes,
-  fontWeights,
-} from "./constants";
+	Color,
+	ColorScheme,
+	colorSchemes,
+	colors,
+	fontSizes,
+	fontWeights,
+} from './constants'
+import { BaseDivFC } from './base'
 
 type TurnPlateProps = {
-  title: string;
-  colorScheme: ColorScheme;
-} & HTMLAttributes<HTMLDivElement>;
+	title: string
+  content: string
+	colorScheme: ColorScheme
+} & HTMLAttributes<HTMLDivElement>
 
-const InternalTurnPlate: React.FC<PropsWithChildren<TurnPlateProps>> = ({
-  children,
-  className,
-  colorScheme,
-  title,
+export const TurnPlate: React.FC<PropsWithChildren<TurnPlateProps>> = ({
+	children,
+	colorScheme,
+	title,
+  content,
+	...restProps
 }) => {
-  return (
-    <Outer>
-      <TurnPlateSvg color={colorSchemes[colorScheme].bgColor} />
-      <div className={className}>
-        <div className="title">{title}</div>
-        <div className="content">{children}</div>
-      </div>
-      ;
-    </Outer>
-  );
-};
+	const { style, ...propsWithoutStyle } = restProps
+	return (
+		<div
+			style={{
+				position: 'relative',
+				width: 'fit-content',
+				...style,
+			}}
+			{...propsWithoutStyle}>
+			<TurnPlateSvg color={colorSchemes[colorScheme].bgColor} />
+			<PlateContent colorScheme={colorScheme}>
+				<div className="title">{title}</div>
+				<div className="content">{content}</div>
+			</PlateContent>
+		</div>
+	)
+}
 
-export const TurnPlate = styled(InternalTurnPlate)`
-  position: absolute;
-  inset: 0;
+const PlateContent = styled(BaseDivFC<{ colorScheme: ColorScheme }>)`
+	position: absolute;
+	inset: 0;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
-  font-size: ${fontSizes.xl};
-  font-weight: ${fontWeights.bold};
+	font-size: ${fontSizes.xl};
+	font-weight: ${fontWeights.bold};
 
-  padding-bottom: 5px;
+	padding-bottom: 5px;
 
-  color: ${(props) => colorSchemes[props.colorScheme].color};
+	color: ${(props) => colorSchemes[props.colorScheme].color};
 
-  & .title {
-    font-size: ${fontSizes.small};
-    text-transform: uppercase;
-  }
-`;
+  user-select: none;
+
+	& .title {
+		font-size: ${fontSizes.small};
+		text-transform: uppercase;
+	}
+`
 
 export const Outer = styled.div`
-  position: relative;
+	position: relative;
 
-  width: fit-content;
-`;
+	width: fit-content;
+`

@@ -52,11 +52,11 @@ export class Mechanics {
     this.cellHeight = availableSpaceY / Mechanics.cellsCountY;
   }
 
-  getInitialLeftPos(x: number) {
+  getXPos(x: number) {
     const abs =
       this.outerOffsetX +
-      this.innerOffsetX * (x - 1) +
-      (this.cellWidth * (2 * x - 1)) / 2;
+      this.innerOffsetX * (x) +
+      (this.cellWidth * (2 * x + 1)) / 2;
 
     return `${(abs / this.boardWidth) * 100}%`;
   }
@@ -64,8 +64,8 @@ export class Mechanics {
   getYPos(y: number) {
     const abs =
       this.outerOffsetTop +
-      this.innerOffsetY * (y - 1) +
-      (this.cellHeight * (2 * y - 1)) / 2;
+      this.innerOffsetY * (y) +
+      (this.cellHeight * (2 * y + 1)) / 2;
 
     return `${(abs / this.boardHeight) * 100}%`;
   }

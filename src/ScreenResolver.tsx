@@ -1,38 +1,16 @@
-import { useEffect } from "react";
-import { Spinner } from "./components/Spinner";
-import { Battle } from "./partials/Battle";
-import { EnterName } from "./partials/EnterName";
-import { Pending } from "./partials/Pending";
-import { StartMenu } from "./partials/StartMenu";
-import { useGlobalStore } from "./zustand/gameplay";
+import { useEffect } from 'react'
+import { authActions } from './api-redux/auth'
+import { useAppDispatch } from './redux/store'
+import { screenMap } from './screenMap'
+import { useSelectorNav } from './redux/selectors'
 
 export const ScreenResolver = () => {
-  const [state, username, me, wasAuth] = useGlobalStore((state) => [
-    state.state,
-    state.username,
-    state.me,
-    state.wasAuth
-  ]);
+	const { page } = useSelectorNav()
+	const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    me();
-  }, [me]);
+	useEffect(() => {
+		authActions.me(dispatch)
+	}, [])
 
-//   return <Pending />
-
-  if (!wasAuth) return <Spinner />;
-  if (!username) return <EnterName />
-
-  switch (state) {
-    case "LOGIN":
-      return <EnterName />;
-    case "MAIN_MENU":
-      return <StartMenu />;
-    case "PLAYING":
-      return <Battle />;
-    case "PENDING":
-      return <Pending />;
-    default:
-      throw new Error("Something wrong");
-  }
-};
+	return screenMap[page]
+}

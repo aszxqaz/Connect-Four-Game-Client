@@ -67,6 +67,7 @@ export const MainMenuButton = styled(styled(Base)`
 
   &:disabled {
     box-shadow: 0px 2px 0px ${colors.black};
+    opacity: 0.9;
     color: transparent;
     transform: translateY(8px);
     cursor: initial;

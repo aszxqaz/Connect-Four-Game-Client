@@ -1,13 +1,17 @@
-export const LayerWhite = () => {
+import { BaseComponent } from "../types";
+
+export const LayerWhite: BaseComponent<React.SVGProps<SVGSVGElement>> = (
+  props
+) => {
   return (
     <svg
-    //   width="632"
-    //   height="584"
+      //   width="632"
+      //   height="584"
       viewBox="0 0 632 584"
       fill="none"
-    //   xmlns="http://www.w3.org/2000/svg"
-    //   preserveAspectRatio="none"
-
+      //   xmlns="http://www.w3.org/2000/svg"
+      //   preserveAspectRatio="none"
+      {...props}
     >
       <g id="Shape">
         <mask id="path-1-inside-1_5_6178" fill="white">
